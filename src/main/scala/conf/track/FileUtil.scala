@@ -7,10 +7,9 @@ import java.io.{BufferedReader, File, FileNotFoundException, FileReader}
   */
 object FileUtil {
 
-  def readFile(filePath: String): BufferedReader = {
-    if( filePath == null || filePath.isEmpty() ) throw new FileNotFoundException("file path is empty, can not find the file")
-
-    return new BufferedReader( new FileReader( new File(filePath) ));
-  }
+  def readResourceFile(path: String): List[String] =
+    Option(getClass.getResourceAsStream(path)).map(scala.io.Source.fromInputStream)
+      .map(_.getLines.toList)
+      .getOrElse(throw new FileNotFoundException(path))
 
 }

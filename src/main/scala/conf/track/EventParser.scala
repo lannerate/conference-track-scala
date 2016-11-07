@@ -2,7 +2,11 @@ package conf.track
 
 import java.io.BufferedReader
 import java.util.regex.{Matcher, Pattern}
+
 import conf.track.DurationUnit._
+
+import scala.collection.mutable.ListBuffer
+import scala.io.Source
 /**
   * Created by hzhang3 on 11/7/2016.
   */
@@ -10,15 +14,14 @@ object EventParser {
 
 
 
-  def parse(filePath: String): List[Event] = {
-    val events: List[Event] = List[Event]()
+  def parse(filePath: String): ListBuffer[Event] = {
 
-    val reader: BufferedReader = FileUtil.readFile(filePath)
-    var line: String = null
-    while ((line = reader.readLine) != null) {
-      val event: Event = parseLine(line)
-      if (event != null) event :: events
+    var events = new ListBuffer[Event]()
+
+    for (line <- Source.fromFile(filePath).getLines()) {
+      events += parseLine(line)
     }
+
     return events
   }
 

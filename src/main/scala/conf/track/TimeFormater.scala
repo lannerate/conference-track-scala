@@ -15,6 +15,6 @@ object TimeFormater {
 
     hoursDisplay = if (hoursDisplay > 12) hoursDisplay - 12 else hoursDisplay
 
-    String.format("%02d:%02d%s", hoursDisplay, minutesDisplay, suffix)
+    "%02d:%02d%s".format(hoursDisplay, minutesDisplay, suffix)
   }
 }

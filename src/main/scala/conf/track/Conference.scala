@@ -1,13 +1,15 @@
 package conf.track
 
+import scala.collection.mutable.ListBuffer
+
 /**
   * Created by hzhang3 on 11/7/2016.
   */
 class Conference() {
-  val tracks: List[Track] = List[Track]()
+  var tracks: ListBuffer[Track] = new ListBuffer[Track]();
 
   def addTrack(track: Track) {
-    track :: tracks
+    tracks += track
   }
 
   override def toString: String = {
@@ -29,10 +31,10 @@ class Conference() {
 
 class Track() {
 
-  val periods: List[Period] = List[Period]()
+  var periods = new ListBuffer[Period]()
 
   def addPeriod(period: Period) {
-    period :: periods
+    periods += period
   }
 
   override def toString: String = {
@@ -45,14 +47,15 @@ class Track() {
   }
 }
 
-case class Period(startTime:Int, sessionDuration:Int) {
-  val events = List[Event]()
+case class Period(startTime:Int, sessionDuration:Int ) {
+  val events = new ListBuffer[Event]()
 
-  var otherPeriod: Period;
+  var otherPeriod: Period = null;
 
-  var totalRemainingTime = startTime
+  //firstly init period, for morning session period, lunch period, afternoon session period, and networking period.
+  var totalRemainingTime = sessionDuration
 
-  def addOtherPeriod(newPeriod:Period){
+  def addOtherPeriod(newPeriod:Period) = {
     otherPeriod = newPeriod
   }
 
@@ -60,7 +63,7 @@ case class Period(startTime:Int, sessionDuration:Int) {
     if (null != event) {
       if (totalRemainingTime < event.getDurationMinutes) throw new IllegalArgumentException("Not enough space time to take the event:" + event.toString)
 
-       event :: events
+       events += event
 
       //consume this event, total remaining time need to minus this event duration time
       totalRemainingTime -= event.getDurationMinutes
@@ -69,7 +72,7 @@ case class Period(startTime:Int, sessionDuration:Int) {
 
   def hasEnoughSpaceTime(event: Event) = totalRemainingTime >= event.getDurationMinutes
 
-  def addEventSchedule(events: List[Event], startTime: Int, collectedResult: StringBuilder): Int = {
+  def addEventSchedule(events: ListBuffer[Event], startTime: Int, collectedResult: StringBuilder): Int = {
     var nextStartTime: Int = startTime
 
     for (event <- events) {
