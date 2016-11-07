@@ -45,7 +45,7 @@ class Track() {
   }
 }
 
-class Period(startTime:Int, sessionDuration:Int) {
+case class Period(startTime:Int, sessionDuration:Int) {
   val events = List[Event]()
 
   var otherPeriod: Period;
@@ -55,9 +55,10 @@ class Period(startTime:Int, sessionDuration:Int) {
   def addOtherPeriod(newPeriod:Period){
     otherPeriod = newPeriod
   }
+
   def addEvents(event: Event):Unit = {
     if (null != event) {
-      if (totalRemainingTime < event.getDurationMinutes) throw new IllegalArgumentException("Not enough space time to take the event:" + event.getDescription)
+      if (totalRemainingTime < event.getDurationMinutes) throw new IllegalArgumentException("Not enough space time to take the event:" + event.toString)
 
        event :: events
 
@@ -97,7 +98,7 @@ class Period(startTime:Int, sessionDuration:Int) {
 
 }
 
-class Event(description: String, duration: Int, durationUnit: DurationUnit) {
+case class Event(description: String, duration: Int, durationUnit: DurationUnit) {
 
   val getDurationMinutes = durationUnit.toMinutes(duration)
 
