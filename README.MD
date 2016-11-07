@@ -1,4 +1,4 @@
-## Using scala to implement the solution for Problem1
+## Implementing the solution for Problem1 by scala language
 
 ##The rule for Problem 1
 - The conference has multiple tracks each of which has a morning and afternoon session.
@@ -45,9 +45,9 @@ The main method is in `ConferenceApp`, the basic processes as below.
 > `> sbt compile`
 > `> sbt package`
 
-> 2. After build it successfully,in the folder `$rootproject/target/scala-2.xx`, you will find the build jar `conference-track-1.0.jar`
+> 2. After build it successfully,in the folder `$rootproject/target/scala-2.xx`, you will find the build jar `conference-track-scala_2.xx.jar`
 > and then run the command to get conference result 
->`> java -jar conference-track-scala_2.xx.jar your_input_file`
+>`> scala conference-track-scala_2.xx.jar your_input_file`
 > For example
->`> java -jar target/scala-2.xx/conference-track-scala_2.xx.jar ./src/test/resources/InputFile`
+>`> scala target/scala-2.11/conference-track-scala_2.11-1.0.jar ./src/test/resources/InputFile`
 
