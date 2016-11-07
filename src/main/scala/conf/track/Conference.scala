@@ -15,11 +15,11 @@ class Conference() {
   override def toString: String = {
     val builder: StringBuilder = new StringBuilder
 
-    if( !tracks.isEmpty ){
+    if (!tracks.isEmpty) {
       var index = 0;
-      for (track <- tracks){
+      for (track <- tracks) {
         index = index + 1
-        builder.append("Track " + index +":" +"\n");
+        builder.append("Track " + index + ":" + "\n");
         builder.append(track);
         builder.append("\n");
       }
@@ -40,14 +40,15 @@ class Track() {
   override def toString: String = {
     val builder: StringBuilder = new StringBuilder
 
-    for(period <- periods){
+    for (period <- periods) {
       builder.append(period)
     }
     return builder.toString
   }
 }
 
-case class Period(startTime:Int, sessionDuration:Int ) {
+
+case class Period(startTime: Int, sessionDuration: Int) {
   val events = new ListBuffer[Event]()
 
   var otherPeriod: Period = null;
@@ -55,15 +56,15 @@ case class Period(startTime:Int, sessionDuration:Int ) {
   //firstly init period, for morning session period, lunch period, afternoon session period, and networking period.
   var totalRemainingTime = sessionDuration
 
-  def addOtherPeriod(newPeriod:Period) = {
+  def addOtherPeriod(newPeriod: Period) = {
     otherPeriod = newPeriod
   }
 
-  def addEvents(event: Event):Unit = {
+  def addEvents(event: Event): Unit = {
     if (null != event) {
       if (totalRemainingTime < event.getDurationMinutes) throw new IllegalArgumentException("Not enough space time to take the event:" + event.toString)
 
-       events += event
+      events += event
 
       //consume this event, total remaining time need to minus this event duration time
       totalRemainingTime -= event.getDurationMinutes
@@ -77,7 +78,7 @@ case class Period(startTime:Int, sessionDuration:Int ) {
 
     for (event <- events) {
       //format the output for each event.
-      val outputForEvent: String = TimeFormater.format(nextStartTime) + " " + event + "\n"
+      val outputForEvent = TimeFormater.format(nextStartTime) + " " + event + "\n"
       collectedResult.append(outputForEvent)
       //add the current event duration to next start time
       nextStartTime += event.getDurationMinutes
@@ -108,9 +109,9 @@ case class Event(description: String, duration: Int, durationUnit: DurationUnit)
   override def toString: String = description + " " + duration + durationUnit
 }
 
-case class DurationUnit(base: Int, name: String){
+case class DurationUnit(base: Int, name: String) {
 
-  def toMinutes(duration: Int):Int =  duration * base
+  def toMinutes(duration: Int): Int = duration * base
 
   override def toString: String = name
 }

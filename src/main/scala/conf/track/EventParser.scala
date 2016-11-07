@@ -12,8 +12,6 @@ import scala.io.Source
   */
 object EventParser {
 
-
-
   def parse(filePath: String): ListBuffer[Event] = {
 
     var events = new ListBuffer[Event]()
