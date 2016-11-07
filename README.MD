@@ -42,11 +42,12 @@ The main method is in `ConferenceApp`, the basic processes as below.
 ##How to Run it
 
 > 1. Switch the root project directory, execute the following cmd to build it.
-> `> gradle build`
+> `> sbt compile`
+> `> sbt package`
 
-> 2. After build it successfully,in the folder `$rootproject/build/libs`, you will find the build jar `conference-track-1.0.jar`
+> 2. After build it successfully,in the folder `$rootproject/target/scala-2.xx`, you will find the build jar `conference-track-1.0.jar`
 > and then run the command to get conference result 
->`> java -jar conference-track-1.0.jar  your_input_file`
+>`> java -jar conference-track-scala_2.xx.jar your_input_file`
 > For example
->`> java -jar conference-track-1.0.jar ../../src/test/resources/InputFile`
+>`> java -jar target/scala-2.xx/conference-track-scala_2.xx.jar ./src/test/resources/InputFile`
 

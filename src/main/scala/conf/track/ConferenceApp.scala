@@ -9,17 +9,21 @@ import scala.collection.mutable.ListBuffer
   */
 object ConferenceApp extends App {
 
+  override def main(args: Array[String]) = {
 
-  //1. read input files, parse files
-  val inputFilePath: String = args(0)
+    //1. read input files, parse files
+    val inputFilePath: String = args(0)
 
-  if (inputFilePath == null || inputFilePath.isEmpty()) {
-    System.exit(1);
+    if (inputFilePath == null || inputFilePath.isEmpty()) {
+      System.exit(1);
+    }
+    //2. run conference schedule()
+    val conference: Conference = schedule(inputFilePath);
+    //3. print the context of conference
+    println(conference);
+
   }
-  //        2. run conference schedule()
-  val conference: Conference = schedule(inputFilePath);
-  //        3. print the context of conference
-  println(conference);
+
 
 
   def schedule(inputFilePath: String): Conference = {
@@ -35,7 +39,6 @@ object ConferenceApp extends App {
     //        > populate Tracks to Conference
     val conference: Conference = new Conference();
     processEvents(events, conference);
-    println(conference)
     return conference;
   }
 
@@ -74,7 +77,7 @@ object ConferenceApp extends App {
   }
 
   def populateEvents(morningPeriod: Period, events: ListBuffer[Event]) = {
-    for(event <- events){
+    for (event <- events) {
       if (morningPeriod.hasEnoughSpaceTime(event)) {
         morningPeriod.addEvents(event)
         events -= event
