@@ -2,7 +2,7 @@ name := "conference-track-scala"
 
 version := "1.0"
 
-scalaVersion := "2.12.0"
+scalaVersion := "2.11.8"
 
 mainClass in (Compile, run) := Some("conf.track.ConferenceApp")
 
