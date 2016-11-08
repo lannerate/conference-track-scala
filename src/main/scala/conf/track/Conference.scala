@@ -5,7 +5,7 @@ import scala.collection.mutable.ListBuffer
 /**
   * Created by hzhang3 on 11/7/2016.
   */
-class Conference() {
+case class Conference() {
   val tracks: ListBuffer[Track] = ListBuffer[Track]();
 
   def addTrack(track: Track) {

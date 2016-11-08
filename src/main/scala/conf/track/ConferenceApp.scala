@@ -36,9 +36,7 @@ object ConferenceApp extends App {
     //        > configure for Morning/Lunch/Afternoon/networking period.
     //        > populate Events to Period, consume events when the current period has enough space time.
     //        > populate Tracks to Conference
-    val conference: Conference = new Conference();
-    processEvents(events, conference);
-    return conference;
+    processEvents(events, Conference());
   }
 
 
