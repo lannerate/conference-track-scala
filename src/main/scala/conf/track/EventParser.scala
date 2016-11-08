@@ -14,7 +14,7 @@ object EventParser {
 
   def parse(filePath: String): ListBuffer[Event] = {
 
-    var events = new ListBuffer[Event]()
+    val events = new ListBuffer[Event]()
 
     for (line <- Source.fromFile(filePath).getLines()) {
       events += parseLine(line)
@@ -49,7 +49,7 @@ object EventParser {
     val description: String = matcher.group(INDEX_EVENET_DESC)
     val duration: String = matcher.group(INDEX_EVENET_DURATION)
 
-    return new Event(
+    return Event(
       description,
       if (duration == null || duration.isEmpty) 1 else duration.toInt,
       if (durationUnitStr.equalsIgnoreCase( MINUTE.name )) MINUTE else  LIGHTENING

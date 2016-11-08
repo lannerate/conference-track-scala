@@ -6,7 +6,7 @@ import scala.collection.mutable.ListBuffer
   * Created by hzhang3 on 11/7/2016.
   */
 class Conference() {
-  var tracks: ListBuffer[Track] = new ListBuffer[Track]();
+  val tracks: ListBuffer[Track] = new ListBuffer[Track]();
 
   def addTrack(track: Track) {
     tracks += track
@@ -31,7 +31,7 @@ class Conference() {
 
 class Track() {
 
-  var periods = new ListBuffer[Period]()
+  val periods = new ListBuffer[Period]()
 
   def addPeriod(period: Period) {
     periods += period
@@ -118,7 +118,7 @@ case class DurationUnit(base: Int, name: String) {
 
 object DurationUnit {
 
-  val MINUTE: DurationUnit = new DurationUnit(1, "min")
+  val MINUTE: DurationUnit = DurationUnit(1, "min")
 
-  val LIGHTENING: DurationUnit = new DurationUnit(5, "lightning")
+  val LIGHTENING: DurationUnit =  DurationUnit(5, "lightning")
 }

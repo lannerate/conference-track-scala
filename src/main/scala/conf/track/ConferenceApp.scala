@@ -25,7 +25,6 @@ object ConferenceApp extends App {
   }
 
 
-
   def schedule(inputFilePath: String): Conference = {
     //        1. parse events from input files
     var events = EventParser.parse(inputFilePath)
@@ -56,18 +55,21 @@ object ConferenceApp extends App {
 
     while (events != null && !events.isEmpty) {
       //config periods
-      val morningPeriod: Period = new Period(MORNING_SESSION_START_TIME, MORNING_SESSION_DURATION)
+      val morningPeriod: Period = Period(MORNING_SESSION_START_TIME, MORNING_SESSION_DURATION)
       populateEvents(morningPeriod, events)
-      val lunchPeriod: Period = new Period(LUNCH_START_TIME, LUNCH_DURATION)
-      lunchPeriod.addEvents(new Event("Lunch", LUNCH_DURATION, MINUTE))
-      val afternoonPeriod: Period = new Period(AFTERNOON_SESSION_START_TIME, AFTERNOON_SESSION_DURATION)
+
+      val lunchPeriod: Period = Period(LUNCH_START_TIME, LUNCH_DURATION)
+      lunchPeriod.addEvents(Event("Lunch", LUNCH_DURATION, MINUTE))
+
+      val afternoonPeriod: Period = Period(AFTERNOON_SESSION_START_TIME, AFTERNOON_SESSION_DURATION)
       populateEvents(afternoonPeriod, events)
+
       //adding networking period to afternoon period, specially handle the networking event.
-      val netWorkingPeriod: Period = new Period(NETWORK_EVENT_START_TIME, NETWORK_EVENT_DURATION)
-      netWorkingPeriod.addEvents(new Event("Networking Event", NETWORK_EVENT_DURATION, MINUTE))
+      val netWorkingPeriod: Period = Period(NETWORK_EVENT_START_TIME, NETWORK_EVENT_DURATION)
+      netWorkingPeriod.addEvents(Event("Networking Event", NETWORK_EVENT_DURATION, MINUTE))
       afternoonPeriod.addOtherPeriod(netWorkingPeriod)
 
-      var track: Track = new Track
+      val track: Track = new Track
       track.addPeriod(morningPeriod)
       track.addPeriod(lunchPeriod)
       track.addPeriod(afternoonPeriod)
