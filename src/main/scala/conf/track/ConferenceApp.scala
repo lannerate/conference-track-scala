@@ -14,7 +14,7 @@ object ConferenceApp extends App {
     //1. read input files, parse files
     val inputFilePath: String = args(0)
 
-    if (inputFilePath == null || inputFilePath.isEmpty()) {
+    if (inputFilePath == null || inputFilePath.isEmpty ) {
       System.exit(1);
     }
     //2. run conference schedule()
@@ -27,7 +27,7 @@ object ConferenceApp extends App {
 
   def schedule(inputFilePath: String): Conference = {
     //        1. parse events from input files
-    var events = EventParser.parse(inputFilePath)
+    val events = EventParser.parse(inputFilePath)
 
     if (events.isEmpty) {
       return null;
@@ -69,7 +69,7 @@ object ConferenceApp extends App {
       netWorkingPeriod.addEvents(Event("Networking Event", NETWORK_EVENT_DURATION, MINUTE))
       afternoonPeriod.addOtherPeriod(netWorkingPeriod)
 
-      val track: Track = new Track
+      val track: Track = Track()
       track.addPeriod(morningPeriod)
       track.addPeriod(lunchPeriod)
       track.addPeriod(afternoonPeriod)
