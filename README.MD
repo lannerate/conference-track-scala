@@ -1,3 +1,6 @@
+[![Build Status](https://travis-ci.org/lannerate/conference-track-scala.svg?branch=master)](https://travis-ci.org/lannerate/conference-track-scala)
+
+
 ## Implementing the solution for Problem1 by scala language
 
 ##The rule for Problem 1
