@@ -7,7 +7,11 @@ object TimeFormater {
 
   def format(minutes: Int):String = {
     val maxSupportMinutes: Int = 24 * 60 - 1 // only one day
-    if (minutes > maxSupportMinutes) throw new IllegalArgumentException("greater than max support minutes:" + maxSupportMinutes + "min")
+    if (minutes > maxSupportMinutes) {
+      val msg = "greater than max support minutes:" + maxSupportMinutes + "min"
+      Logger.error(msg)
+      throw new IllegalArgumentException(msg)
+    }
 
     var hoursDisplay: Int = minutes / 60
     val minutesDisplay: Int = minutes % 60
