@@ -7,6 +7,7 @@ import conf.track.DurationUnit._
 
 import scala.collection.mutable.ListBuffer
 import scala.io.Source
+
 /**
   * Created by hzhang3 on 11/7/2016.
   */
@@ -24,12 +25,8 @@ object EventParser {
   }
 
   def parseLine(line: String): Event = {
-    val INDEX_EVENET_DESC: Int = 1
-    val INDEX_EVENET_DURATION: Int = 2
-    val INDEX_EVENET_DURATION_UNIT: Int = 3
 
     if (line == null || line.isEmpty) return null
-
     /** the sample
       * Common Ruby Errors 45min
       * Rails for Python Developers lightning
@@ -39,20 +36,17 @@ object EventParser {
     //      ^(.+)\               : event description
     //      (\d+)?               : event duration
     //      ((min)|(lightning))$ : event duration unit
-    val matcher: Matcher = Pattern.compile("^(.+)\\s(\\d+)?\\s?((min)|(lightning))$").matcher(line)
+    val pattern = """^(.+)\s(\d+)?\s?((min)|(lightning))$""".r
 
-    if (!matcher.find) return null
+    val matched = pattern.findFirstMatchIn(line);
 
-    val durationUnitStr: String = matcher.group(INDEX_EVENET_DURATION_UNIT)
-    if (durationUnitStr == null || durationUnitStr.isEmpty) return null
-
-    val description: String = matcher.group(INDEX_EVENET_DESC)
-    val duration: String = matcher.group(INDEX_EVENET_DURATION)
-
-    return Event(
-      description,
-      if (duration == null || duration.isEmpty) 1 else duration.toInt,
-      if (durationUnitStr.equalsIgnoreCase( MINUTE.name )) MINUTE else  LIGHTENING
-    )
+    return  matched match {
+      case Some(m) => Event(
+        m.group(1),
+        if (m.group(2) == null || m.group(2).isEmpty) 1 else m.group(2).toInt,
+        if (m.group(3).equalsIgnoreCase(MINUTE.name)) MINUTE else LIGHTENING
+      )
+      case None => null
+    }
   }
 }
