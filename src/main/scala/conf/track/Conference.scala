@@ -62,8 +62,11 @@ case class Period(startTime: Int, sessionDuration: Int) {
 
   def addEvents(event: Event): Unit = {
     if (null != event) {
-      if (totalRemainingTime < event.getDurationMinutes) throw new IllegalArgumentException("Not enough space time to take the event:" + event.toString)
-
+      if (totalRemainingTime < event.getDurationMinutes) {
+        val msg ="Not enough space time to take the event:" + event.toString
+        Logger.warn(msg)
+        throw new IllegalArgumentException(msg)
+      }
       events += event
 
       //consume this event, total remaining time need to minus this event duration time
@@ -72,6 +75,7 @@ case class Period(startTime: Int, sessionDuration: Int) {
   }
 
   def hasEnoughSpaceTime(event: Event) = totalRemainingTime >= event.getDurationMinutes
+
 
   def addEventSchedule(events: ListBuffer[Event], startTime: Int, collectedResult: StringBuilder): Int = {
     var nextStartTime: Int = startTime

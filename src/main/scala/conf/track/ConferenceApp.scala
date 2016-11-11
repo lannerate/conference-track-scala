@@ -79,10 +79,10 @@ object ConferenceApp extends App {
     return conference
   }
 
-  def populateEvents(morningPeriod: Period, events: ListBuffer[Event]) = {
+  def populateEvents(period: Period, events: ListBuffer[Event]) = {
     for (event <- events) {
-      if (morningPeriod.hasEnoughSpaceTime(event)) {
-        morningPeriod.addEvents(event)
+      if (period.hasEnoughSpaceTime(event)) {
+        period.addEvents(event)
         events -= event
       }
     }
