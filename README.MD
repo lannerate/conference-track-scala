@@ -29,11 +29,11 @@ Each track can contains multiple event periods, that may include morning session
 #### Period
 Each Period can contains multiple events(talk or networking). 
 #### Event
-Each event means every talk session or networking, which has event description, and event duration.
+Each event represents every talk session or networking, which has event description, and event duration.
 
 ### The processing of schedule conference.
 The main method is in `ConferenceApp`, the basic processes as below.
-> 1. Read input files, and parse files to events.
+> 1. Read input files, and parse file to events.
 
 > 2. Run the method `ConferenceApp.schedule()` to get the scheduled conference.
 > > * Configure Morning/Lunch/Afternoon/Networking Period.
@@ -50,7 +50,7 @@ The main method is in `ConferenceApp`, the basic processes as below.
 
 > 2. After build it successfully,in the folder `$rootproject/target/scala-2.xx`, you will find the build jar `conference-track-scala_2.xx.jar`
 > and then run the command to get conference result 
->`> scala conference-track-scala_2.xx.jar your_input_file`
+>```> scala conference-track-scala_2.xx.jar your_input_file```
 > For example
->`> scala target/scala-2.11/conference-track-scala_2.11-1.0.jar ./src/test/resources/InputFile`
+>```> scala target/scala-2.11/conference-track-scala_2.11-1.0.jar ./src/test/resources/InputFile```
 
