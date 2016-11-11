@@ -3,6 +3,7 @@ package conf.track
 import conf.track.DurationUnit._
 
 import scala.collection.mutable.ListBuffer
+import scala.runtime.Nothing$
 
 /**
   * Created by hzhang3 on 11/7/2016.
@@ -19,25 +20,26 @@ object ConferenceApp extends App {
       System.exit(1);
     }
     //2. run conference schedule()
-    val conference: Conference = schedule(inputFilePath);
+    val conferenceOption: Option[Conference] = schedule(inputFilePath);
     //3. print the context of conference
-    println(conference);
+    println(conferenceOption.getOrElse("there is no conference content."));
 
   }
 
 
-  def schedule(inputFilePath: String): Conference = {
+  def schedule(inputFilePath: String): Option[Conference] = {
     //        1. parse events from input files
     val events = EventParser.parse(inputFilePath)
 
     if (events.isEmpty) {
-      return null;
+      Logger.warn("There is no events after parsed.")
+     return None
     }
     //        2. process events
     //        > configure for Morning/Lunch/Afternoon/networking period.
     //        > populate Events to Period, consume events when the current period has enough space time.
     //        > populate Tracks to Conference
-    processEvents(events, Conference());
+    Some(processEvents(events, Conference()));
   }
 
 

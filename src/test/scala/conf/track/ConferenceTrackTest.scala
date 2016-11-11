@@ -20,8 +20,8 @@ class ConferenceTrackTest extends FunSpec {
       assert( !linesExcepted.isEmpty )
       assert( linesActual.size == linesExcepted.size )
 
-      val countOfDifferentLine = getCountOfDifferentLines(linesActual,linesExcepted);
-      assert( countOfDifferentLine == 0 )
+      val countOfDifferentLines = getCountOfDifferentLines(linesActual,linesExcepted);
+      assert( countOfDifferentLines == 0 )
     }
 
     def getCountOfDifferentLines(l1:List[String], l2: List[String]) =
@@ -31,9 +31,9 @@ class ConferenceTrackTest extends FunSpec {
 
       val filePath = getClass.getResource(inputFile).getFile
 
-      val conference = ConferenceApp.schedule( filePath )
+      val conferenceOption = ConferenceApp.schedule( filePath )
 
-      return conference.toString.split("\n").toList
+      return conferenceOption.getOrElse("\n").toString.split("\n").toList
     }
 
     def getExceptedLines(exceptedFile: String): List[String] = readResourceFile(exceptedFile)
