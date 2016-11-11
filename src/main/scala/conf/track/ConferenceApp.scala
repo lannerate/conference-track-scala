@@ -15,6 +15,7 @@ object ConferenceApp extends App {
     val inputFilePath: String = args(0)
 
     if (inputFilePath == null || inputFilePath.isEmpty ) {
+      Logger.error("the input path is empty, please make sure your input path is valid ")
       System.exit(1);
     }
     //2. run conference schedule()

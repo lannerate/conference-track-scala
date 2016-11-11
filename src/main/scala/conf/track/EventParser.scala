@@ -37,14 +37,17 @@ object EventParser {
     //      (\d+)?               : event duration
     //      ((min)|(lightning))$ : event duration unit
     val pattern = """^(.+)\s(\d+)?\s?((min)|(lightning))$""".r
+    val EVENT_DES_IND = 1
+    val EVENT_DURATION_IND = 2
+    val EVENT_DURATION_UNIT_IND = 3
 
     val matched = pattern.findFirstMatchIn(line);
 
     return  matched match {
       case Some(m) => Event(
-        m.group(1),
-        if (m.group(2) == null || m.group(2).isEmpty) 1 else m.group(2).toInt,
-        if (m.group(3).equalsIgnoreCase(MINUTE.name)) MINUTE else LIGHTENING
+        m.group(EVENT_DES_IND),
+        if (m.group(EVENT_DURATION_IND) == null) 1 else m.group(EVENT_DURATION_IND).toInt,
+        if (m.group(EVENT_DURATION_UNIT_IND).equalsIgnoreCase(MINUTE.name)) MINUTE else LIGHTENING
       )
       case None => null
     }
