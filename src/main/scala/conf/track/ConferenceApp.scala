@@ -66,6 +66,9 @@ object ConferenceApp extends App {
       populateEvents(afternoonPeriod, events)
 
       //adding networking period to afternoon period, specially handle the networking event.
+
+//   Notes: NETWORK_EVENT_START_TIME is default start time,
+//   if the previous event start time is later than networking event time, will using the previous event start times.
       val netWorkingPeriod: Period = Period(NETWORK_EVENT_START_TIME, NETWORK_EVENT_DURATION)
       netWorkingPeriod.addEvents(Event("Networking Event", NETWORK_EVENT_DURATION, MINUTE))
       afternoonPeriod.addOtherPeriod(netWorkingPeriod)

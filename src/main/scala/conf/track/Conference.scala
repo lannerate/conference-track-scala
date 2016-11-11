@@ -59,6 +59,7 @@ case class Period(startTime: Int, sessionDuration: Int) {
   def addOtherPeriod(newPeriod: Period) = {
     otherPeriod = newPeriod
   }
+  def hasEnoughSpaceTime(event: Event) = totalRemainingTime >= event.getDurationMinutes
 
   def addEvents(event: Event): Unit = {
     if (null != event) {
@@ -73,9 +74,6 @@ case class Period(startTime: Int, sessionDuration: Int) {
       totalRemainingTime -= event.getDurationMinutes
     }
   }
-
-  def hasEnoughSpaceTime(event: Event) = totalRemainingTime >= event.getDurationMinutes
-
 
   def addEventSchedule(events: ListBuffer[Event], startTime: Int, collectedResult: StringBuilder): Int = {
     var nextStartTime: Int = startTime
@@ -99,6 +97,7 @@ case class Period(startTime: Int, sessionDuration: Int) {
     if (otherPeriod != null) {
       var otherStartTime: Int = otherPeriod.startTime
       if (nextStartTime > otherStartTime) otherStartTime = nextStartTime
+
       nextStartTime = addEventSchedule(otherPeriod.events, otherStartTime, collectedResult)
     }
     return collectedResult.toString
