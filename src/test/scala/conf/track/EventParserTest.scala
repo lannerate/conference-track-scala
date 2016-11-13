@@ -10,7 +10,7 @@ class EventParserTest extends FunSpec{
   describe("Parse one event from one line"){
     it("should parse 'Common Ruby Errors 45min' from one line string "){
       val line = "Common Ruby Errors 45min";
-      val event = EventParser.parseLine(line);
+      val event = EventParser.parseLine(line).getOrElse(null);
       assert( event != null);
       assert( "Common Ruby Errors" == event.description)
       assert( 45 == event.duration )
@@ -20,7 +20,7 @@ class EventParserTest extends FunSpec{
 
     it("should parse 'Rails for Python Developers lightning' from one line string "){
       val line = "Rails for Python Developers lightning"
-      val event = EventParser.parseLine(line);
+      val event = EventParser.parseLine(line).getOrElse(null);
       assert( event != null);
       assert( "Rails for Python Developers"  == event.description)
       assert( 1 == event.duration )

@@ -37,11 +37,11 @@ object ConferenceApp extends App {
     //        > configure for Morning/Lunch/Afternoon/networking period.
     //        > populate Events to Period, consume events when the current period has enough space time.
     //        > populate Tracks to Conference
-    Some(processEvents(events, Conference()));
+    processEvents(events, Conference())
   }
 
 
-  def processEvents(events: ListBuffer[Event], conference: Conference): Conference = {
+  def processEvents(events: ListBuffer[Event], conference: Conference): Option[Conference] = {
     val MORNING_SESSION_DURATION: Int = 180 //minutes
     val LUNCH_DURATION: Int = 60
     val AFTERNOON_SESSION_DURATION: Int = 240
@@ -77,7 +77,7 @@ object ConferenceApp extends App {
       track.addPeriod(afternoonPeriod)
       conference.addTrack(track)
     }
-    return conference
+    Some(conference)
   }
 
   def populateEvents(period: Period, events: ListBuffer[Event]) = {

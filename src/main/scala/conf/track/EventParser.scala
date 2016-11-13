@@ -18,13 +18,14 @@ object EventParser {
     val events = new ListBuffer[Event]()
 
     for (line <- Source.fromFile(filePath).getLines()) {
-      events += parseLine(line)
+      val event = parseLine(line).getOrElse(null)
+      events += event
     }
 
     return events
   }
 
-  def parseLine(line: String): Event = {
+  def parseLine(line: String): Option[Event] = {
 
     if (line == null || line.isEmpty) return null
     /** the sample
@@ -44,12 +45,12 @@ object EventParser {
     val matched = pattern.findFirstMatchIn(line);
 
     return  matched match {
-      case Some(m) => Event(
+      case Some(m) => Some( Event(
         m.group(EVENT_DES_IND),
         if (m.group(EVENT_DURATION_IND) == null) 1 else m.group(EVENT_DURATION_IND).toInt,
         if (m.group(EVENT_DURATION_UNIT_IND).equalsIgnoreCase(MINUTE.name)) MINUTE else LIGHTENING
-      )
-      case None => null
+      ))
+      case _ => None
     }
   }
 }

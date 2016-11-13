@@ -86,7 +86,7 @@ case class Period(startTime: Int, sessionDuration: Int) {
       nextStartTime += event.getDurationMinutes
     }
 
-    return nextStartTime
+    nextStartTime
   }
 
   override def toString: String = {
@@ -100,7 +100,7 @@ case class Period(startTime: Int, sessionDuration: Int) {
 
       nextStartTime = addEventSchedule(otherPeriod.events, otherStartTime, collectedResult)
     }
-    return collectedResult.toString
+    collectedResult.toString
   }
 
 }
@@ -119,7 +119,7 @@ case class DurationUnit (base: Int, name: String) {
   override def toString: String = name
 }
 
-object DurationUnit {
+object DurationUnit extends Enumeration{
 
   val MINUTE: DurationUnit = DurationUnit(1, "min")
 

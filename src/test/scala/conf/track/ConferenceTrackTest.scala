@@ -33,7 +33,7 @@ class ConferenceTrackTest extends FunSpec {
 
       val conferenceOption = ConferenceApp.schedule( filePath )
 
-      return conferenceOption.getOrElse("\n").toString.split("\n").toList
+      conferenceOption.getOrElse("\n").toString.split("\n").toList
     }
 
     def getExceptedLines(exceptedFile: String): List[String] = readResourceFile(exceptedFile)
