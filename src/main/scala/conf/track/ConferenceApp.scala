@@ -10,7 +10,6 @@ import scala.runtime.Nothing$
   */
 object ConferenceApp extends App {
 
-  override def main(args: Array[String]) = {
 
     //1. read input files, parse files
     val inputFilePath: String = args(0)
@@ -24,7 +23,6 @@ object ConferenceApp extends App {
     //3. print the context of conference
     println(conferenceOption.getOrElse("there is no conference content."));
 
-  }
 
 
   def schedule(inputFilePath: String): Option[Conference] = {

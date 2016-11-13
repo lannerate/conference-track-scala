@@ -112,7 +112,7 @@ case class Event(description: String, duration: Int, durationUnit: DurationUnit)
   override def toString: String = description + " " + duration + durationUnit
 }
 
-case class DurationUnit(base: Int, name: String) {
+case class DurationUnit (base: Int, name: String) {
 
   def toMinutes(duration: Int): Int = duration * base
 
